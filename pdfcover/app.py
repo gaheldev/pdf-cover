@@ -6,7 +6,7 @@ from gi.repository import Gtk
 import os
 from pypdf import PdfWriter
 
-from . import helpers
+from .helpers import pdfopen
 
 
 
@@ -185,7 +185,7 @@ class MyWindow(Gtk.Window):
         merger.close()
         print('done')
 
-        helpers.pdfopen(self.generated)
+        pdfopen(self.generated)
 
 
 
