@@ -39,14 +39,14 @@ class MyWindow(Gtk.Window):
         frame.add(hbox)
 
         self.cover_label = Gtk.Label(label='...')
-        hbox.pack_start(self.cover_label, True, True, 0)
+        hbox.pack_start(self.cover_label, True, True, 15)
 
         cover_button = Gtk.Button(label="Pick cover")
         cover_button.connect("clicked", self.on_pick_cover)
         hbox.pack_start(cover_button, False, True, 0)
 
         # extract first page
-        hbox = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=0)
+        hbox = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=10)
         vbox.add(hbox)
 
         self.check_first_page = Gtk.CheckButton(label="Extract first page", active=True)
@@ -61,7 +61,7 @@ class MyWindow(Gtk.Window):
         frame.add(hbox)
 
         self.body_label = Gtk.Label(label='...')
-        hbox.pack_start(self.body_label, True, True, 0)
+        hbox.pack_start(self.body_label, True, True, 15)
 
         body_button = Gtk.Button(label="Pick body")
         body_button.connect("clicked", self.on_pick_body)
