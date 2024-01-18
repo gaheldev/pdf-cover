@@ -4,7 +4,7 @@ gi.require_version("Gtk", "3.0")
 from gi.repository import Gtk
 
 import os
-from pypdf import PdfWriter
+from pypdf import PdfWriter, PageRange
 
 from .helpers import pdfopen
 
@@ -49,13 +49,18 @@ class MyWindow(Gtk.Window):
         hbox = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=10)
         vbox.add(hbox)
 
-        self.check_first_page = Gtk.CheckButton(label="Extract first page", active=True)
-        hbox.pack_end(self.check_first_page, False, True, 0)
+        self.check_extract_first_page = Gtk.CheckButton(label="Extract first page", active=True)
+        hbox.pack_end(self.check_extract_first_page, False, True, 0)
 
         ########################################################3
         # body picker
+        vbox = Gtk.Box(spacing=10,
+                       orientation=Gtk.Orientation.VERTICAL)
+        box_outer.pack_start(vbox, False, True, 0)
+
+        # file picker
         frame = Gtk.Frame()
-        box_outer.pack_start(frame, False, True, 0)
+        vbox.add(frame)
 
         hbox = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=0)
         frame.add(hbox)
@@ -67,6 +72,13 @@ class MyWindow(Gtk.Window):
         body_button.connect("clicked", self.on_pick_body)
         hbox.pack_start(body_button, False, True, 0)
 
+        # remove first page
+        hbox = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=10)
+        vbox.add(hbox)
+
+        self.check_remove_first_page = Gtk.CheckButton(label="Remove first page", active=True)
+        hbox.pack_end(self.check_remove_first_page, False, True, 0)
+
         ########################################################3
         # export
         generate_button = Gtk.Button(label="Export")
@@ -75,8 +87,13 @@ class MyWindow(Gtk.Window):
 
 
     @property
-    def extract_first_page(self) -> bool:
-        return self.check_first_page.get_active()
+    def extract_cover_first_page(self) -> bool:
+        return self.check_extract_first_page.get_active()
+
+
+    @property
+    def remove_body_first_page(self) -> bool:
+        return self.check_remove_first_page.get_active()
 
 
     def add_filters(self, dialog):
@@ -167,12 +184,15 @@ class MyWindow(Gtk.Window):
 
         merger = PdfWriter()
 
-        if self.extract_first_page:
+        if self.extract_cover_first_page:
             merger.append(self.cover, [0])
         else:
             merger.append(self.cover)
 
-        merger.append(self.body)
+        if self.remove_body_first_page:
+            merger.append(self.body, PageRange("1:"))
+        else:
+            merger.append(self.body)
 
         merger.write(self.generated)
         merger.close()
