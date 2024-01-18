@@ -1,0 +1,1 @@
+from pdfcover import app
