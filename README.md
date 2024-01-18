@@ -1,12 +1,12 @@
 # Run
 
-## From source code
+### From source code
 
 ```
 python main.py
 ```
 
-## Compile it yourself
+### Compile it yourself
 
 ```
 pip install virtualenv
