@@ -12,7 +12,7 @@ from .helpers import pdfopen
 
 class MyWindow(Gtk.Window):
     def __init__(self):
-        super().__init__(title="pdfcover")
+        super().__init__(title="pdfcover", resizable=False, default_width=320)
         self.set_border_width(10)
 
         self.cover = ''
