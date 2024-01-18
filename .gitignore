@@ -2,3 +2,8 @@
 .env.leave
 .venv/
 *__pycache__/
+
+*.spec
+*.pdf
+build/
+dist/
