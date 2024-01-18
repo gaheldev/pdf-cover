@@ -20,13 +20,17 @@ jobs:
             CMD_BUILD: |
               ./ubuntu-dependencies
               make build
-            OUT_FILE_NAME: dist/pdfcover
+              mkdir dist/linux
+              mv dist/pdfcover dist/linux
+            OUT_FILE_NAME: dist/linux
           - os: macos-latest
             TARGET: macos
             CMD_BUILD: |
               ./macos-dependencies
               make build
-            OUT_FILE_NAME: dist/pdfcover
+              mkdir dist/macos
+              mv dist/pdfcover dist/macos
+            OUT_FILE_NAME: dist/macos
           # - os: windows-latest
           #   TARGET: windows
           #   CMD_BUILD: |
