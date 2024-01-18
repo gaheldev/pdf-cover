@@ -21,56 +21,51 @@ class MyWindow(Gtk.Window):
 
         ########################################################3
         # structure
-        box_outer = Gtk.Box(spacing=6,
-                      orientation=Gtk.Orientation.VERTICAL)
+        box_outer = Gtk.Box(spacing=25,
+                            orientation=Gtk.Orientation.VERTICAL)
         self.add(box_outer)
 
         ########################################################3
         # cover picker
-        listbox_cover = Gtk.ListBox()
-        listbox_cover.set_selection_mode(Gtk.SelectionMode.NONE)
-        box_outer.pack_start(listbox_cover, True, True, 0)
+        vbox = Gtk.Box(spacing=10,
+                       orientation=Gtk.Orientation.VERTICAL)
+        box_outer.pack_start(vbox, False, True, 0)
 
         # file picker
-        row = Gtk.ListBoxRow()
-        hbox = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=0)
-        row.add(hbox)
+        frame = Gtk.Frame()
+        vbox.add(frame)
 
-        self.cover_label = Gtk.Label()
+        hbox = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=0)
+        frame.add(hbox)
+
+        self.cover_label = Gtk.Label(label='...')
         hbox.pack_start(self.cover_label, True, True, 0)
 
         cover_button = Gtk.Button(label="Pick cover")
         cover_button.connect("clicked", self.on_pick_cover)
         hbox.pack_start(cover_button, False, True, 0)
 
-        listbox_cover.add(row)
-
         # extract first page
         hbox = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=0)
-        box_outer.add(hbox)
+        vbox.add(hbox)
 
         self.check_first_page = Gtk.CheckButton(label="Extract first page", active=True)
         hbox.pack_end(self.check_first_page, False, True, 0)
 
         ########################################################3
         # body picker
-        listbox_body = Gtk.ListBox()
-        listbox_body.set_selection_mode(Gtk.SelectionMode.NONE)
-        box_outer.pack_start(listbox_body, True, True, 0)
+        frame = Gtk.Frame()
+        box_outer.pack_start(frame, False, True, 0)
 
-        row = Gtk.ListBoxRow()
         hbox = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=0)
-        row.add(hbox)
+        frame.add(hbox)
 
-        self.body_label = Gtk.Label()
+        self.body_label = Gtk.Label(label='...')
         hbox.pack_start(self.body_label, True, True, 0)
 
         body_button = Gtk.Button(label="Pick body")
         body_button.connect("clicked", self.on_pick_body)
         hbox.pack_start(body_button, False, True, 0)
-
-        listbox_body.add(row)
-        box_outer.add(listbox_body)
 
         ########################################################3
         # export
