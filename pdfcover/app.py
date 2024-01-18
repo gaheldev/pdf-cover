@@ -107,11 +107,7 @@ class MyWindow(Gtk.Window):
         file = ''
         response = dialog.run()
         if response == Gtk.ResponseType.OK:
-            print("Open clicked")
-            print("File selected: " + dialog.get_filename())
             file = dialog.get_filename()
-        elif response == Gtk.ResponseType.CANCEL:
-            print("Cancel clicked")
 
         dialog.destroy()
         return file
@@ -133,11 +129,7 @@ class MyWindow(Gtk.Window):
         file = ''
         response = dialog.run()
         if response == Gtk.ResponseType.APPLY:
-            print("Apply clicked")
-            print("File selected: " + dialog.get_filename())
             file = dialog.get_filename()
-        elif response == Gtk.ResponseType.CANCEL:
-            print("Cancel clicked")
 
         dialog.destroy()
         return file
@@ -159,8 +151,14 @@ class MyWindow(Gtk.Window):
             self.generated += '.pdf'
 
         if os.path.isfile(self.generated):
-            print('file exists')
-            return
+            dialog = Gtk.MessageDialog(
+                text='File already exists, override?', secondary_text=f"{self.generated}", parent=self, buttons=Gtk.ButtonsType.OK_CANCEL
+            )
+
+            response = dialog.run()
+            dialog.destroy()
+            if response == Gtk.ResponseType.CANCEL:
+                return
 
         self.export()
 
