@@ -14,8 +14,7 @@ cd pdf-cover
 pip install virtualenv
 virtualenv .venv
 source .venv/bin/activate
-pip install -r requirements.txt
-./compile
+make build
 ./dist/pdfcover
 ```
 
