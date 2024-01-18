@@ -16,19 +16,21 @@ jobs:
           - os: ubuntu-20.04 # for glibc compatibility with systems > 20.04
             TARGET: linux
             CMD_BUILD: |
+              ./ubuntu-dependencies
               make build
             OUT_FILE_NAME: dist/pdfcover
-         - os: macos-latest
-          TARGET: macos
+          - os: macos-latest
+            TARGET: macos
             CMD_BUILD: |
+              ./macos-dependencies
               make build
             OUT_FILE_NAME: dist/pdfcover
-         - os: windows-latest
-          TARGET: windows
-            CMD_BUILD: |
-              make build &&
-              mv dist/pdfcover dist/pdfcover.exe
-            OUT_FILE_NAME: dist/pdfcover.exe
+          # - os: windows-latest
+          #   TARGET: windows
+          #   CMD_BUILD: |
+          #     make build &&
+          #     mv dist/pdfcover dist/pdfcover.exe
+          #   OUT_FILE_NAME: dist/pdfcover.exe
     steps:
       - uses: actions/checkout@v4
       - name: Set up Python 3.11
