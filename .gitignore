@@ -1,3 +1,4 @@
 .env
 .env.leave
 .venv/
+*__pycache__/
