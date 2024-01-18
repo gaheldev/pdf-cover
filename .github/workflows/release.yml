@@ -13,12 +13,12 @@ jobs:
     strategy:
       matrix:
         include:
-          - os: ubuntu-20.04 # for glibc compatibility with systems > 20.04
-            TARGET: linux
-            CMD_BUILD: |
-              ./ubuntu-dependencies
-              make build
-            OUT_FILE_NAME: dist/pdfcover
+          # - os: ubuntu-20.04 # for glibc compatibility with systems > 20.04
+          #   TARGET: linux
+          #   CMD_BUILD: |
+          #     ./ubuntu-dependencies
+          #     make build
+          #   OUT_FILE_NAME: dist/pdfcover
           - os: macos-latest
             TARGET: macos
             CMD_BUILD: |
