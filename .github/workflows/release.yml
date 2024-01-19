@@ -29,7 +29,7 @@ jobs:
               ./macos-dependencies
               make build
               cd dist
-              tar -czvf macos.tar.gz pdfcover
+              tar -czvf macos.tar.gz pdfcover.app
             OUT_FILE_NAME: dist/macos.tar.gz
           # - os: windows-latest
           #   TARGET: windows
