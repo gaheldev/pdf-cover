@@ -1,3 +1,3 @@
 pip install -r requirements.txt
-pyinstaller -D main.py -n pdfcover --windowed
+pyinstaller -D main.py -n pdfcover --windowed --icon icon.jpg
 
